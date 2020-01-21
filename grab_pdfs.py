@@ -29,7 +29,8 @@ from urllib.parse import urljoin
 from os import path, getcwd
 from bs4 import BeautifulSoup as soup
 from sys import argv
-
+import os
+import time
 
 def get_page(base_url):
     req = get(base_url)
@@ -39,7 +40,7 @@ def get_page(base_url):
 
 
 def get_all_links(html):
-    bs = soup(html)
+    bs = soup(html, "html.parser")
     links = bs.findAll('a')
     return links
 
@@ -47,18 +48,30 @@ def get_all_links(html):
 def get_pdf(base_url, base_dir):
     html= get_page(base_url)
     links = get_all_links(html)
+    # import ipdb; ipdb.set_trace()
+    print(f"{len(links)} links found for pdf")
     if len(links) == 0:
         raise Exception('No links found on the webpage')
     n_pdfs = 0
+    failed_urls = []
     for link in links:
         if link['href'][-4:] == '.pdf':
             n_pdfs += 1
-            content = get(urljoin(base_url, link['href']))
+            pdf_url = urljoin(base_url, link['href'])
+            content = get(pdf_url)
             if content.status_code == 200 and content.headers['content-type'] == 'application/pdf':
-                with open(path.join(base_dir, link.text + '.pdf'), 'wb+') as pdf:
+                out_path = path.join(base_dir, link.text.replace("/", "\\") + '.pdf')
+                if os.path.exists(out_path):
+                    out_path = out_path + str(time.time())
+                with open(out_path, 'wb+') as pdf:
                     pdf.write(content.content)
+                print(f"{n_pdfs}... {pdf_url} downloaded to {out_path}")
+            else:
+                failed_urls.append(pdf_url)
     if n_pdfs == 0:
         raise Exception('No pdfs found on the page')
+    if failed_urls:
+        print(f"Pdf files from following URLs couldn't be downloaded:\n{failed_urls}")
     print("{0} pdfs downloaded and saved in {1}".format(n_pdfs, base_dir))
 
 
@@ -73,3 +86,16 @@ if __name__ == '__main__':
         arg = argv[2]
     base_dir = [getcwd(), arg][path.isdir(arg)]
     get_pdf(url ,base_dir)
+
+"""
+SAMPLE RUN:
+
+COMMAND:
+python grab_pdfs.py http://exam.dtu.ac.in/result_all.htm all_results
+
+OUTPUT:
+...
+Pdf files from following URLs couldn't be downloaded:
+['http://www.reg.exam.dtu.ac.in/alist/O18_1_UFM_MT_877.pdf', 'http://exam.dtu.ac.in/result_2019/O18_3_UFM_MT_877.pdf', 'http://www.reg.exam.dtu.ac.in/alist/O18_1_BBA_UFM_877.pdf', 'http://exam.dtu.ac.in/result_2019/O18_3_BBA_UFM_877.pdf', 'http://exam.dtu.ac.in/result_2019/O18_3_BAE_UFM_877.pdf', 'http://exam.dtu.ac.in/result1/CON_RW_BT_738.pdf']
+1323 pdfs downloaded and saved in all_results
+"""
