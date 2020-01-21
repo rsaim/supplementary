@@ -12,7 +12,7 @@ page = pdf_pages[0]
 name_replacement_map = {
     'Sr.No. Name'   : 'name',
     'Roll No.'      : 'roll_no',
-    'Unnamed: 1'    : 'paper_failed'
+    'Unnamed: 1'    : 'papers_failed'
 }
 
 sanitized_pages = []
