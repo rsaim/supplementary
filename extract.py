@@ -1,6 +1,19 @@
 import tabula
 import numpy as np
 import pandas as pd
+import os
+
+
+for filename in os.listdir("."):
+    filename = os.path.abspath(filename)
+    pdf_pages = tabula.read_pdf(filename, pages='all')
+    for page_df in pdf_pages:
+        for column in page_df:
+            for val in page_df[column]:
+                if isinstance(val, str) and "SAIM" in val.upper():
+                    print(filename)
+import sys
+sys.exit(0)
 
 # This will be a list of pd.DataFrame.
 pdf_pages = tabula.read_pdf("/Users/saim/supplementary/some_file.pdf", pages='all')
