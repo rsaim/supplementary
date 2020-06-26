@@ -1,3 +1,4 @@
+# TODO: Fix tomorrow
 import tabula
 import numpy as np
 import pandas as pd
@@ -16,7 +17,7 @@ import sys
 sys.exit(0)
 
 # This will be a list of pd.DataFrame.
-pdf_pages = tabula.read_pdf("/Users/saim/supplementary/some_file.pdf", pages='all')
+pdf_pages = tabula.read_pdf("/Users/saim/supplementary/test_file.pdf", pages='all')
 
 
 # Sanitizing a particular page.
