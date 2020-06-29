@@ -23,19 +23,13 @@ with open('/Users/saim/github/supplementary/test_pdfs/success_urls.pkl', 'rb') a
 """
 import pickle
 import shutil
+from os.path import realpath
 
 from tqdm import tqdm
-
-__author__ = 'elssar <elssar@altrawcode.com>'
-__license__ = 'MIT'
-__version__ = '1.0.0'
-
 from urllib.parse import urljoin
-from os import path, getcwd
+from os import path
 from bs4 import BeautifulSoup as soup
-from sys import argv
 import os
-import time
 import click
 import requests
 import concurrent
@@ -43,7 +37,7 @@ import urllib
 import sys
 import pprint
 
-from loguru import logger
+from loguru import logger as log
 
 
 MAX_DOWNLOAD_THREADS = 15
@@ -74,7 +68,7 @@ def scrap_pdfs_from_url(url, outdir, overwrite):
     :return:
         None
     """
-    outdir = os.path.realpath(outdir)
+    outdir = realpath(outdir)
     if os.path.exists(outdir):
         if overwrite:
             shutil.rmtree(outdir)
@@ -83,9 +77,9 @@ def scrap_pdfs_from_url(url, outdir, overwrite):
             if overwrite_dir.lower() == "y":
                 shutil.rmtree(outdir)
             else:
-                logger.info("Exiting...")
+                log.info("Exiting...")
                 sys.exit(0)
-    logger.info("Creating directory {}".format(outdir))
+    log.info("Creating directory {}".format(outdir))
     os.mkdir(outdir)
 
     content = requests.get(url)
@@ -94,9 +88,9 @@ def scrap_pdfs_from_url(url, outdir, overwrite):
     links = list(filter(lambda link:link['href'].endswith('.pdf'),
                         soup(content.text, "html.parser").findAll('a')))
     links[0]['href'] = links[0]['href'] + "wrongit"
-    logger.info("{} pdf links found from {}".format(len(links), url))
+    log.info("{} pdf links found from {}".format(len(links), url))
     if len(links) == 0:
-        logger.warning("No link to pdf found in {}".format(url))
+        log.warning("No link to pdf found in {}".format(url))
         sys.exit(1)
 
     failed_urls  = {}
@@ -108,13 +102,13 @@ def scrap_pdfs_from_url(url, outdir, overwrite):
                          for link in links}
         progress_bar = tqdm(range(len(links)), leave=False)
         for future in concurrent.futures.as_completed(future_to_url):
-            url = future_to_url[future]
+            res = future_to_url[future]
             try:
                 future.result()
             except Exception as exc:
-                failed_urls[url['href']] = repr(exc)
+                failed_urls[urljoin(url, res['href'])] = str(exc)
             else:
-                success_urls.append(url)
+                success_urls.append(res)
             progress_bar.display()
             progress_bar.update()
             sys.stdout.flush()
@@ -125,19 +119,19 @@ def scrap_pdfs_from_url(url, outdir, overwrite):
         failed_urls_file = os.path.join(outdir, FAILED_URL_FNAME)
         with open(failed_urls_file, "wb") as f:
             pickle.dump(failed_urls, f)
-        logger.error("Failed to download pdf from {} urls. Load this mapping of urls->errors in a python session as: "
+        log.error("Failed to download pdf from {} urls. Load this mapping of urls->errors in a python session as: "
                      "\nwith open('{}', 'rb') as f: failed_urls=pickle.load(f)".format(len(failed_urls),
                                                                                failed_urls_file))
-        logger.error("Failed urls:\n{}".format(pprint.pformat(failed_urls)))
+        log.error("Failed urls:\n{}".format(pprint.pformat(failed_urls)))
 
     # Save successful urls as well - this can be useful for skipping the downloaded files
     success_urls_file = os.path.join(outdir, SUCCESS_URL_FNAME)
     with open(success_urls_file, "wb") as f:
         pickle.dump(success_urls, f)
-    logger.info("Successfully downloded {} pdf files. Load this list of urls in an ipython session as \n"
+    log.info("Successfully downloded {} pdf files. Load this list of urls in an ipython session as \n"
                  "with open('{}', 'rb') as f: success_urls=pickle.load(f)".format(len(success_urls),
                                                                                   success_urls_file))
-    logger.info("DONE!!")
+    log.info("DONE!!")
 
 
 @click.command()
@@ -153,16 +147,3 @@ def main(url, outdir, overwrite):
 
 if __name__ == '__main__':
     main()
-
-"""
-SAMPLE RUN:
-
-COMMAND:
-python download_results.py http://exam.dtu.ac.in/result_all.htm all_results
-
-OUTPUT:
-...
-Pdf files from following URLs couldn't be downloaded:
-['http://www.reg.exam.dtu.ac.in/alist/O18_1_UFM_MT_877.pdf', 'http://exam.dtu.ac.in/result_2019/O18_3_UFM_MT_877.pdf', 'http://www.reg.exam.dtu.ac.in/alist/O18_1_BBA_UFM_877.pdf', 'http://exam.dtu.ac.in/result_2019/O18_3_BBA_UFM_877.pdf', 'http://exam.dtu.ac.in/result_2019/O18_3_BAE_UFM_877.pdf', 'http://exam.dtu.ac.in/result1/CON_RW_BT_738.pdf']
-1323 pdfs downloaded and saved in all_results
-"""
