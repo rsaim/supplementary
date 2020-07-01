@@ -94,7 +94,7 @@ def parse_pdf(filename):
         A list of `pandas.DataFrame`
     """
     filename = realpath(filename)
-
+    log.info(f"Parsing {filename}")
     # Use tabula to parse the pdf
     start_ts = timer()
     # This will be a list of `pandas.DataFrame`
@@ -104,7 +104,7 @@ def parse_pdf(filename):
     log.info(f"Found {len(pages_df)} pages in {filename}")
     sanitized_dfs = []
     for num, page_df in enumerate(pages_df):
-        log.info(f"Sanitizing page no {num}...")
+        log.debug(f"Sanitizing page no {num}...")
         sanitized_dfs.append(sanitize_df(page_df))
     log.info(f"Parsed {filename}")
     return sanitized_dfs
