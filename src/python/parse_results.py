@@ -13,7 +13,7 @@ log.add(sys.stdout, level="INFO")
 
 
 SANITIZED_NAME_MAP = {
-    'Sr.No. Name'   : 'name',
+    'Sr.No.  Name'   : 'name',
     'Roll No.'      : 'roll_no',
     'Unnamed: 1'    : 'papers_failed'
 }

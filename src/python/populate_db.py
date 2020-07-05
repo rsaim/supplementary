@@ -25,6 +25,8 @@ db = client.dtu
 
 
 def parse_and_populate_db(pdf):
+    if not pdf.endswith(".pdf"):
+        return
     try:
         df_list = parse_pdf(pdf)
         log.info(f"{pdf}: Parsing OK")
@@ -34,13 +36,13 @@ def parse_and_populate_db(pdf):
 
     for df in df_list:
         try:
-            insert_df_to_db(df)
+            insert_df_to_mongodb(df)
             log.info(f"{pdf}: Inserted to DB")
         except Exception as err:
             log.error(f"{pdf}: Failed to insert a page to DB: {err!r}")
 
 
-def insert_df_to_db(df):
+def insert_df_to_mongodb(df):
     """
     :param df:
         pandas.DataFrame
@@ -74,10 +76,20 @@ def insert_df_to_db(df):
         )
 
 
+DYNAMODB = None
+def insert_df_to_dynamodb(df):
+    if not DYNAMODB:
+        import boto3
+        global  DYNAMODB
+        DYNAMODB = boto3.resource('dynamodb', region_name="ap-southeast-1")
+
+
 def populate_db(dirname=None, filepath=None):
     if dirname and filepath:
         raise ValueError("Specify either filename or dirname")
     if filepath:
+        if not filepath.endswith(".pdf"):
+            return
         parse_and_populate_db(filepath)
     else:
         with concurrent.futures.ProcessPoolExecutor(max_workers=MAX_NUM_PROCESSES) as executor:
