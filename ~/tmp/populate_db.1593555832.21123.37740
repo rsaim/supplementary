@@ -1,0 +1,26 @@
+2020-07-01 03:53:52.214 | INFO     | __main__:main:80 - Writing logs to ~/tmp/populate_db.1593555832.21123.37740
+2020-07-01 03:53:52.219 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
+2020-07-01 03:53:54.878 | INFO     | parse_results:parse_pdf:106 - Took 2.659176539 to parse /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
+2020-07-01 03:53:54.879 | INFO     | parse_results:parse_pdf:108 - Found 3 pages in /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
+2020-07-01 03:53:54.879 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:53:54.879 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:53:54.879 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['Unnamed: 0', 'Delhi School of Management', 'papers_failed', 'Unnamed: 2', 'Unnamed: 3']
+2020-07-01 03:53:54.880 | ERROR    | __main__:parse_and_populate_db:29 - Failed to insert /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf to DB: 'name'
+2020-07-01 03:53:54.880 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:53:57.614 | INFO     | parse_results:parse_pdf:106 - Took 2.734022258 to parse /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:53:57.615 | INFO     | parse_results:parse_pdf:108 - Found 2 pages in /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:53:57.615 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:53:57.615 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:53:57.615 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:53:57.615 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:53:57.615 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:53:57.617 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:53:57.622 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 1...
+2020-07-01 03:53:57.622 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:53:57.622 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:53:57.622 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:53:57.622 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EL-301', 'EL-302', 'EL-303', 'EL-304', 'EL-305', 'EL-306', 'EL-307', 'EL-308', 'EL-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:53:57.623 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:53:57.625 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:53:57.625 | ERROR    | __main__:parse_and_populate_db:29 - Failed to insert /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf to DB: invalid literal for int() with base 10: '2K14/CE/23'
+2020-07-01 03:53:57.626 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/CON_BT_681.pdf

@@ -1,0 +1,329 @@
+2020-07-01 03:56:42.241 | INFO     | __main__:main:85 - Writing logs to ~/tmp/populate_db.1593556002.237612.37824
+2020-07-01 03:56:42.246 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
+2020-07-01 03:56:44.930 | INFO     | parse_results:parse_pdf:106 - Took 2.683131978 to parse /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
+2020-07-01 03:56:44.930 | INFO     | parse_results:parse_pdf:108 - Found 3 pages in /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
+2020-07-01 03:56:44.930 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:56:44.931 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:56:44.931 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['Unnamed: 0', 'Delhi School of Management', 'papers_failed', 'Unnamed: 2', 'Unnamed: 3']
+2020-07-01 03:56:44.931 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:56:44.931 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:56:47.866 | INFO     | parse_results:parse_pdf:106 - Took 2.934734439 to parse /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:56:47.867 | INFO     | parse_results:parse_pdf:108 - Found 2 pages in /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:56:47.867 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:56:47.867 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:56:47.867 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:56:47.867 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:56:47.867 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:56:47.869 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:56:47.872 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 1...
+2020-07-01 03:56:47.873 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:56:47.873 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:56:47.873 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:56:47.873 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EL-301', 'EL-302', 'EL-303', 'EL-304', 'EL-305', 'EL-306', 'EL-307', 'EL-308', 'EL-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:56:47.874 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:56:47.876 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf
+2020-07-01 03:56:47.877 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/23'")
+2020-07-01 03:56:47.877 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/DIS_BT_656_657.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/EL/80'")
+2020-07-01 03:56:47.878 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/CON_BT_681.pdf
+2020-07-01 03:57:01.076 | INFO     | parse_results:parse_pdf:106 - Took 13.197817391000001 to parse /Users/saim/github/supplementary/dtu_results_all/CON_BT_681.pdf
+2020-07-01 03:57:01.077 | INFO     | parse_results:parse_pdf:108 - Found 38 pages in /Users/saim/github/supplementary/dtu_results_all/CON_BT_681.pdf
+2020-07-01 03:57:01.077 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:01.077 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['The Following Candidates who appeared in Bachelor of Technology end semester examinations held in MAY-2017 have completed the requirement & hence declared to']
+2020-07-01 03:57:01.077 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/CON_BT_681.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:01.078 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/E15_BT_DIS_VI_VIII_428.pdf
+2020-07-01 03:57:04.673 | INFO     | parse_results:parse_pdf:106 - Took 3.5951591699999987 to parse /Users/saim/github/supplementary/dtu_results_all/E15_BT_DIS_VI_VIII_428.pdf
+2020-07-01 03:57:04.674 | INFO     | parse_results:parse_pdf:108 - Found 3 pages in /Users/saim/github/supplementary/dtu_results_all/E15_BT_DIS_VI_VIII_428.pdf
+2020-07-01 03:57:04.674 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:04.674 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:57:04.674 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:57:04.674 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:04.675 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-311', 'EC-312', 'EC-313', 'EC-314', 'EC-315', 'EC-316', 'EC-317', 'EC-318', 'EC-319', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:57:04.677 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:57:04.679 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 1...
+2020-07-01 03:57:04.679 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:04.679 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['1', 'AYUSH  NOHWAR', '2K10/CE/18', '56', 'Unnamed: 0', 'papers_failed', '4', 'Unnamed: 2']
+2020-07-01 03:57:04.679 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/E15_BT_DIS_VI_VIII_428.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:04.680 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/O17_REV_BTPT_1_756.pdf
+2020-07-01 03:57:06.939 | INFO     | parse_results:parse_pdf:106 - Took 2.2586875970000015 to parse /Users/saim/github/supplementary/dtu_results_all/O17_REV_BTPT_1_756.pdf
+2020-07-01 03:57:06.939 | INFO     | parse_results:parse_pdf:108 - Found 0 pages in /Users/saim/github/supplementary/dtu_results_all/O17_REV_BTPT_1_756.pdf
+2020-07-01 03:57:06.939 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/O17_REV_BTPT_1_756.pdf
+2020-07-01 03:57:06.940 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/o14_BTPT_Bac_349.pdf
+2020-07-01 03:57:15.558 | INFO     | parse_results:parse_pdf:106 - Took 8.617626662 to parse /Users/saim/github/supplementary/dtu_results_all/o14_BTPT_Bac_349.pdf
+2020-07-01 03:57:15.559 | INFO     | parse_results:parse_pdf:108 - Found 34 pages in /Users/saim/github/supplementary/dtu_results_all/o14_BTPT_Bac_349.pdf
+2020-07-01 03:57:15.559 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:15.560 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['1', 'JEEVAN CHANDRA', '2K13/CECE/15', '32', '26', '0', 'CECE-104CECE-102']
+2020-07-01 03:57:15.560 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/o14_BTPT_Bac_349.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:15.561 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/O11-MT-1&3-REV-78.pdf
+2020-07-01 03:57:17.981 | INFO     | parse_results:parse_pdf:106 - Took 2.4201553669999996 to parse /Users/saim/github/supplementary/dtu_results_all/O11-MT-1&3-REV-78.pdf
+2020-07-01 03:57:17.982 | INFO     | parse_results:parse_pdf:108 - Found 0 pages in /Users/saim/github/supplementary/dtu_results_all/O11-MT-1&3-REV-78.pdf
+2020-07-01 03:57:17.982 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/O11-MT-1&3-REV-78.pdf
+2020-07-01 03:57:17.982 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/PHD_17-22.pdf
+2020-07-01 03:57:23.163 | INFO     | parse_results:parse_pdf:106 - Took 5.180059283999995 to parse /Users/saim/github/supplementary/dtu_results_all/PHD_17-22.pdf
+2020-07-01 03:57:23.163 | INFO     | parse_results:parse_pdf:108 - Found 0 pages in /Users/saim/github/supplementary/dtu_results_all/PHD_17-22.pdf
+2020-07-01 03:57:23.163 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/PHD_17-22.pdf
+2020-07-01 03:57:23.164 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/CON_SUP_DIS_558.pdf
+2020-07-01 03:57:33.738 | INFO     | parse_results:parse_pdf:106 - Took 10.573740606999998 to parse /Users/saim/github/supplementary/dtu_results_all/CON_SUP_DIS_558.pdf
+2020-07-01 03:57:33.738 | INFO     | parse_results:parse_pdf:108 - Found 24 pages in /Users/saim/github/supplementary/dtu_results_all/CON_SUP_DIS_558.pdf
+2020-07-01 03:57:33.738 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:33.738 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['The Following Candidates who appeared in Bachelor of Technology end semester examinations held in MAY-2016 have completed the requirement & hence declared to']
+2020-07-01 03:57:33.739 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/CON_SUP_DIS_558.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:33.739 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/EO14_MT_Conso_375.pdf
+2020-07-01 03:57:35.839 | INFO     | parse_results:parse_pdf:106 - Took 2.1000670410000026 to parse /Users/saim/github/supplementary/dtu_results_all/EO14_MT_Conso_375.pdf
+2020-07-01 03:57:35.840 | INFO     | parse_results:parse_pdf:108 - Found 11 pages in /Users/saim/github/supplementary/dtu_results_all/EO14_MT_Conso_375.pdf
+2020-07-01 03:57:35.840 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:35.841 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:35.841 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['Unnamed: 0', 'papers_failed', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'The Following Candidates who appeared in M.Tech. end semester examinations held in EVEN-2014 have completed the\rrequirement & hence declared to have pass the final examinations. These Candidates have obtained 80 credits.']
+2020-07-01 03:57:35.841 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/EO14_MT_Conso_375.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:35.842 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/DIS_BTECH_840.pdf
+2020-07-01 03:57:38.626 | INFO     | parse_results:parse_pdf:106 - Took 2.7843346750000038 to parse /Users/saim/github/supplementary/dtu_results_all/DIS_BTECH_840.pdf
+2020-07-01 03:57:38.627 | INFO     | parse_results:parse_pdf:108 - Found 0 pages in /Users/saim/github/supplementary/dtu_results_all/DIS_BTECH_840.pdf
+2020-07-01 03:57:38.627 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/DIS_BTECH_840.pdf
+2020-07-01 03:57:38.628 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/MTECH_Conso_FT_302.pdf
+2020-07-01 03:57:39.988 | INFO     | parse_results:parse_pdf:106 - Took 1.359490889 to parse /Users/saim/github/supplementary/dtu_results_all/MTECH_Conso_FT_302.pdf
+2020-07-01 03:57:39.988 | INFO     | parse_results:parse_pdf:108 - Found 12 pages in /Users/saim/github/supplementary/dtu_results_all/MTECH_Conso_FT_302.pdf
+2020-07-01 03:57:39.988 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:39.988 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:39.989 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['Unnamed: 0', 'papers_failed', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'The Following Candidates who appeared in M.Tech. end semester examinations held in EVEN-2014 have completed the\rrequirement & hence declared to have pass the final examinations. These Candidates have obtained 80 credits.']
+2020-07-01 03:57:39.989 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/MTECH_Conso_FT_302.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:39.989 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/E15_MT_II_401.pdf
+2020-07-01 03:57:43.532 | INFO     | parse_results:parse_pdf:106 - Took 3.543001516000004 to parse /Users/saim/github/supplementary/dtu_results_all/E15_MT_II_401.pdf
+2020-07-01 03:57:43.533 | INFO     | parse_results:parse_pdf:108 - Found 5 pages in /Users/saim/github/supplementary/dtu_results_all/E15_MT_II_401.pdf
+2020-07-01 03:57:43.533 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:43.534 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:57:43.534 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:57:43.534 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:43.535 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-621', 'CE-6222', 'CE-6232', 'CE-6713', 'CE-6721', 'CE-624', 'CE-673', 'CE-674', 'TC', 'SGPA', 'papers_failed']
+2020-07-01 03:57:43.537 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:57:43.544 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 1...
+2020-07-01 03:57:43.545 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:43.545 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['1', 'ARVIND  KUMAR', '2K13/GTE/04', 'Unnamed: 0', 'papers_failed', '75', 'Unnamed: 2', '3', 'Unnamed: 3']
+2020-07-01 03:57:43.545 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/E15_MT_II_401.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:43.546 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/O15_BTPT_485.pdf
+2020-07-01 03:57:56.919 | INFO     | parse_results:parse_pdf:106 - Took 13.373205665 to parse /Users/saim/github/supplementary/dtu_results_all/O15_BTPT_485.pdf
+2020-07-01 03:57:56.920 | INFO     | parse_results:parse_pdf:108 - Found 50 pages in /Users/saim/github/supplementary/dtu_results_all/O15_BTPT_485.pdf
+2020-07-01 03:57:56.920 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:56.921 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['1', 'BHUDEV', '2K14/CECE/08', 'A', 'A.1', 'Unnamed: 0', '0', 'CECE-103CECE-102']
+2020-07-01 03:57:56.921 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/O15_BTPT_485.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:56.922 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/CON_LE_180_818.pdf
+2020-07-01 03:57:58.027 | INFO     | parse_results:parse_pdf:106 - Took 1.104965477999997 to parse /Users/saim/github/supplementary/dtu_results_all/CON_LE_180_818.pdf
+2020-07-01 03:57:58.028 | INFO     | parse_results:parse_pdf:108 - Found 5 pages in /Users/saim/github/supplementary/dtu_results_all/CON_LE_180_818.pdf
+2020-07-01 03:57:58.028 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:58.028 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:58.028 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['Unnamed: 0', 'papers_failed', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5', 'Unnamed: 6', 'Unnamed: 7', 'Unnamed: 8', 'Unnamed: 9', 'Unnamed: 10']
+2020-07-01 03:57:58.029 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/CON_LE_180_818.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:57:58.029 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/REV_O16_BT_I_665.pdf
+2020-07-01 03:57:59.768 | INFO     | parse_results:parse_pdf:106 - Took 1.7383526630000006 to parse /Users/saim/github/supplementary/dtu_results_all/REV_O16_BT_I_665.pdf
+2020-07-01 03:57:59.768 | INFO     | parse_results:parse_pdf:108 - Found 1 pages in /Users/saim/github/supplementary/dtu_results_all/REV_O16_BT_I_665.pdf
+2020-07-01 03:57:59.768 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:57:59.769 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:57:59.769 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:57:59.769 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:57:59.769 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'MA101', 'AP101 EE101', 'CO101', 'ME105', 'papers_failed', 'EN101', 'TC SGPA', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4']
+2020-07-01 03:57:59.770 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:57:59.775 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/REV_O16_BT_I_665.pdf
+2020-07-01 03:57:59.776 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/REV_O16_BT_I_665.pdf: Failed to insert a page to DB: KeyError('TC')
+2020-07-01 03:57:59.776 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/OE15_MT_IV_494.pdf
+2020-07-01 03:58:02.571 | INFO     | parse_results:parse_pdf:106 - Took 2.7945622240000034 to parse /Users/saim/github/supplementary/dtu_results_all/OE15_MT_IV_494.pdf
+2020-07-01 03:58:02.572 | INFO     | parse_results:parse_pdf:108 - Found 1 pages in /Users/saim/github/supplementary/dtu_results_all/OE15_MT_IV_494.pdf
+2020-07-01 03:58:02.572 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:58:02.572 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:02.572 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:02.573 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:02.573 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-821', 'TC', 'SGPA', 'papers_failed']
+2020-07-01 03:58:02.575 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:02.577 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/OE15_MT_IV_494.pdf
+2020-07-01 03:58:02.578 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/OE15_MT_IV_494.pdf: Failed to insert a page to DB: KeyError('SPI')
+2020-07-01 03:58:02.579 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf
+2020-07-01 03:58:10.242 | INFO     | parse_results:parse_pdf:106 - Took 7.662841565999997 to parse /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf
+2020-07-01 03:58:10.243 | INFO     | parse_results:parse_pdf:108 - Found 21 pages in /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf
+2020-07-01 03:58:10.243 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:58:10.243 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.243 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.243 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.243 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.245 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.250 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 1...
+2020-07-01 03:58:10.250 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.250 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.251 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.251 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.252 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.256 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 2...
+2020-07-01 03:58:10.256 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.256 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.256 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.256 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.258 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.261 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 3...
+2020-07-01 03:58:10.262 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.262 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.262 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.262 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.263 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.268 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 4...
+2020-07-01 03:58:10.268 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.269 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.269 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.269 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.270 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.274 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 5...
+2020-07-01 03:58:10.274 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.275 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.275 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.275 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'CE-301', 'CE-302', 'CE-303', 'CE-304', 'CE-305', 'CE-306', 'CE-307', 'CE-308', 'CE-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.276 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.278 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 6...
+2020-07-01 03:58:10.278 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.279 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.279 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.279 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'EL-301', 'EL-302', 'EL-303', 'EL-304', 'EL-305', 'EL-306', 'EL-307', 'EL-308', 'EL-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.280 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.285 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 7...
+2020-07-01 03:58:10.286 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.286 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.286 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.286 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EL-301', 'EL-302', 'EL-303', 'EL-304', 'EL-305', 'EL-306', 'EL-307', 'EL-308', 'EL-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.287 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.291 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 8...
+2020-07-01 03:58:10.291 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.292 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.292 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.292 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'EL-301', 'EL-302', 'EL-303', 'EL-304', 'EL-305', 'EL-306', 'EL-307', 'EL-308', 'EL-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.293 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.296 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 9...
+2020-07-01 03:58:10.297 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.297 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.297 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.297 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EL-301', 'EL-302', 'EL-303', 'EL-304', 'EL-305', 'EL-306', 'EL-307', 'EL-308', 'EL-309', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.298 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.302 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 10...
+2020-07-01 03:58:10.302 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.303 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.303 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.303 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.304 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.309 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 11...
+2020-07-01 03:58:10.309 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.309 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.309 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.310 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.311 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.314 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 12...
+2020-07-01 03:58:10.315 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.315 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.315 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.315 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.316 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.320 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 13...
+2020-07-01 03:58:10.321 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.321 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.321 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.321 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.322 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.327 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 14...
+2020-07-01 03:58:10.327 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.327 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.327 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.327 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.329 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.333 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 15...
+2020-07-01 03:58:10.333 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.333 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.333 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.333 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.335 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.340 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 16...
+2020-07-01 03:58:10.340 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.340 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.340 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.341 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.343 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.347 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 17...
+2020-07-01 03:58:10.347 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.347 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.347 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.347 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EC-401', 'EC-402', 'EC-4038', 'EC-4042', 'EC-405', 'EC-4068', 'EC-407', 'EC-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.349 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.353 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 18...
+2020-07-01 03:58:10.353 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.353 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.354 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.354 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'roll_no', 'Unnamed: 0', 'EN-401', 'EN-402', 'EN-403', 'EN-404', 'EN-405', 'EN-406', 'EN-407', 'EN-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.355 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.360 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 19...
+2020-07-01 03:58:10.360 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.360 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.360 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.360 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EN-401', 'EN-402', 'EN-403', 'EN-404', 'EN-405', 'EN-406', 'EN-407', 'EN-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.362 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.367 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 20...
+2020-07-01 03:58:10.367 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:10.367 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:10.368 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:10.368 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'EN-401', 'EN-402', 'EN-403', 'EN-404', 'EN-405', 'EN-406', 'EN-407', 'EN-408', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:10.369 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:10.372 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf
+2020-07-01 03:58:10.373 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/02'")
+2020-07-01 03:58:10.373 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/24'")
+2020-07-01 03:58:10.374 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/46'")
+2020-07-01 03:58:10.374 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/70'")
+2020-07-01 03:58:10.375 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/95'")
+2020-07-01 03:58:10.375 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/CE/120'")
+2020-07-01 03:58:10.390 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/EL/01'")
+2020-07-01 03:58:10.391 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/EL/27'")
+2020-07-01 03:58:10.391 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/EL/56'")
+2020-07-01 03:58:10.392 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K14/EL/84'")
+2020-07-01 03:58:10.393 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/01'")
+2020-07-01 03:58:10.394 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/27'")
+2020-07-01 03:58:10.395 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/52'")
+2020-07-01 03:58:10.395 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/77'")
+2020-07-01 03:58:10.396 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/100'")
+2020-07-01 03:58:10.397 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/126'")
+2020-07-01 03:58:10.398 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/150'")
+2020-07-01 03:58:10.399 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EC/175'")
+2020-07-01 03:58:10.399 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EN/01'")
+2020-07-01 03:58:10.400 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EN/28'")
+2020-07-01 03:58:10.401 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/O16_BT_V_VII_619.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/EN/53'")
+2020-07-01 03:58:10.402 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_57.pdf
+2020-07-01 03:58:12.386 | INFO     | parse_results:parse_pdf:106 - Took 1.9833457889999977 to parse /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_57.pdf
+2020-07-01 03:58:12.386 | INFO     | parse_results:parse_pdf:108 - Found 1 pages in /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_57.pdf
+2020-07-01 03:58:12.387 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:58:12.387 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['S.No. Roll. No.', 'Unnamed: 0', 'Name of Student Name of', 'Date of Viva', 'voce']
+2020-07-01 03:58:12.387 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_57.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:58:12.387 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/O16_MTPT_SWT_633.pdf
+2020-07-01 03:58:13.962 | INFO     | parse_results:parse_pdf:106 - Took 1.5745558929999959 to parse /Users/saim/github/supplementary/dtu_results_all/O16_MTPT_SWT_633.pdf
+2020-07-01 03:58:13.963 | INFO     | parse_results:parse_pdf:108 - Found 0 pages in /Users/saim/github/supplementary/dtu_results_all/O16_MTPT_SWT_633.pdf
+2020-07-01 03:58:13.963 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/O16_MTPT_SWT_633.pdf
+2020-07-01 03:58:13.963 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_43.pdf
+2020-07-01 03:58:15.899 | INFO     | parse_results:parse_pdf:106 - Took 1.9358592720000019 to parse /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_43.pdf
+2020-07-01 03:58:15.900 | INFO     | parse_results:parse_pdf:108 - Found 0 pages in /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_43.pdf
+2020-07-01 03:58:15.900 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/PHD_Noti_43.pdf
+2020-07-01 03:58:15.900 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/CON_MT_MTPT_531.pdf
+2020-07-01 03:58:20.986 | INFO     | parse_results:parse_pdf:106 - Took 5.085360035000008 to parse /Users/saim/github/supplementary/dtu_results_all/CON_MT_MTPT_531.pdf
+2020-07-01 03:58:20.986 | INFO     | parse_results:parse_pdf:108 - Found 15 pages in /Users/saim/github/supplementary/dtu_results_all/CON_MT_MTPT_531.pdf
+2020-07-01 03:58:20.986 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:58:20.987 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['The Following Candidates who have completed all the requirements of Master of Technology Program & hence declared to']
+2020-07-01 03:58:20.987 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/CON_MT_MTPT_531.pdf: Failed to parse: KeyError('name')
+2020-07-01 03:58:20.987 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/BT_LE_III_273.pdf
+2020-07-01 03:58:22.644 | INFO     | parse_results:parse_pdf:106 - Took 1.6559764470000005 to parse /Users/saim/github/supplementary/dtu_results_all/BT_LE_III_273.pdf
+2020-07-01 03:58:22.644 | INFO     | parse_results:parse_pdf:108 - Found 1 pages in /Users/saim/github/supplementary/dtu_results_all/BT_LE_III_273.pdf
+2020-07-01 03:58:22.644 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:58:22.644 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:22.645 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:22.645 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:22.645 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'PT-201', 'PT-202', 'PT-203', 'PT-204', 'PT-205', 'PT-206', 'PT-207', 'PT-208', 'PT-209', 'PT-210', 'TC', 'SPI', 'papers_failed']
+2020-07-01 03:58:22.647 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:22.649 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/BT_LE_III_273.pdf
+2020-07-01 03:58:22.649 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/BT_LE_III_273.pdf: Failed to insert a page to DB: ValueError("invalid literal for int() with base 10: '2K13/PS/501'")
+2020-07-01 03:58:22.650 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/E13_MT_BIO_181.pdf
+2020-07-01 03:58:24.312 | INFO     | parse_results:parse_pdf:106 - Took 1.6624080830000025 to parse /Users/saim/github/supplementary/dtu_results_all/E13_MT_BIO_181.pdf
+2020-07-01 03:58:24.313 | INFO     | parse_results:parse_pdf:108 - Found 1 pages in /Users/saim/github/supplementary/dtu_results_all/E13_MT_BIO_181.pdf
+2020-07-01 03:58:24.313 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
+2020-07-01 03:58:24.313 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Sr.No. Name' to 'name'
+2020-07-01 03:58:24.313 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Roll No.' to 'roll_no'
+2020-07-01 03:58:24.313 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
+2020-07-01 03:58:24.313 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['name', 'Unnamed: 0', 'roll_no', 'BT-801', 'TC', 'SGPA', 'papers_failed']
+2020-07-01 03:58:24.315 | DEBUG    | parse_results:sanitize_df:47 - Deleting column 'Unnamed: 0'.
+2020-07-01 03:58:24.319 | INFO     | parse_results:parse_pdf:113 - Parsed /Users/saim/github/supplementary/dtu_results_all/E13_MT_BIO_181.pdf
+2020-07-01 03:58:24.320 | ERROR    | __main__:parse_and_populate_db:34 - /Users/saim/github/supplementary/dtu_results_all/E13_MT_BIO_181.pdf: Failed to insert a page to DB: KeyError('SPI')
+2020-07-01 03:58:24.320 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/O15_ME105.pdf
