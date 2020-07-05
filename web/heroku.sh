@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/bin/bash
 web: gunicorn app:app
