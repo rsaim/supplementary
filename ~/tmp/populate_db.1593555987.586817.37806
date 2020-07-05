@@ -1,8 +1,0 @@
-2020-07-01 03:56:27.589 | INFO     | __main__:main:84 - Writing logs to ~/tmp/populate_db.1593555987.586817.37806
-2020-07-01 03:56:27.594 | INFO     | parse_results:parse_pdf:97 - Parsing /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
-2020-07-01 03:56:30.099 | INFO     | parse_results:parse_pdf:106 - Took 2.504277997 to parse /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
-2020-07-01 03:56:30.100 | INFO     | parse_results:parse_pdf:108 - Found 3 pages in /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf
-2020-07-01 03:56:30.100 | INFO     | parse_results:parse_pdf:111 - Sanitizing page no 0...
-2020-07-01 03:56:30.100 | DEBUG    | parse_results:sanitize_df:37 - Sanitizing 'Unnamed: 1' to 'papers_failed'
-2020-07-01 03:56:30.100 | DEBUG    | parse_results:sanitize_df:41 - Sanitized names to ['Unnamed: 0', 'Delhi School of Management', 'papers_failed', 'Unnamed: 2', 'Unnamed: 3']
-2020-07-01 03:56:30.101 | ERROR    | __main__:parse_and_populate_db:27 - /Users/saim/github/supplementary/dtu_results_all/Con_MBA2K11_209.pdf: Failed to parse: KeyError('name')
