@@ -28,16 +28,14 @@ def index():
             item = response["Items"]
             if not item:
                 errors.append("No record found for rollno={}".format(rollno))
-                roll_no = None
             else:
                 results = response["Items"][0]
                 student_name = results["name"]
-                roll_no = rollno
                 del results["name"]
-                del results["rollno"]
+                del results["name"]
         except Exception as err:
             errors.append(repr(err))
-    return render_template('index.html', errors=errors, results=results, student_name=student_name, roll_no=roll_no)
+    return render_template('index.html', errors=errors, results=results, student_name=student_name, rollno=rollno)
 
 
 if __name__ == '__main__':
