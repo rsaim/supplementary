@@ -32,7 +32,7 @@ def index():
                 results = response["Items"][0]
                 student_name = results["name"]
                 del results["name"]
-                del results["name"]
+                del results["rollno"]
         except Exception as err:
             errors.append(repr(err))
     return render_template('index.html', errors=errors, results=results, student_name=student_name, rollno=rollno)
