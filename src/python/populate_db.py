@@ -3,19 +3,20 @@
 """
 This script populates a local MongoDB instance.
 """
+from __future__ import absolute_import, division
+
+import click
 import concurrent
 import json
-import time
+from   loguru                   import logger as log
 import os
-import click
+from   os.path                  import realpath
 import psutil
-from pymongo import MongoClient
-from loguru import logger as log
-from os import listdir
-from os.path import isfile, join, realpath
+from   pymongo                  import MongoClient
+import time
 
-from utils import get_filepaths
-from parse_results import parse_pdf
+from   parse_results            import parse_pdf_to_dfs
+from   utils                    import get_filepaths
 
 
 MAX_NUM_PROCESSES = psutil.cpu_count(logical=True)
@@ -28,7 +29,7 @@ def parse_and_populate_db(pdf):
     if not pdf.endswith(".pdf"):
         return
     try:
-        df_list = parse_pdf(pdf)
+        df_list = parse_pdf_to_dfs(pdf)
         log.info(f"{pdf}: Parsing OK")
     except Exception as err:
         log.error(f"{pdf}: Failed to parse: {err!r}")

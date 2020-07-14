@@ -1,12 +1,12 @@
-import os
+from __future__ import absolute_import, division
+
 import re
 
-import sys
 
 import os
 
 # https://stackoverflow.com/a/19308592/6463555
-from os.path import realpath
+from   os.path                  import realpath
 
 
 def get_filepaths(directory):

@@ -3,6 +3,8 @@ Contains mapping from Subject code to its canonical name in DTU academic departm
 """
 
 # Mapping from code to subject of all courses offered in DTU.
+from __future__ import absolute_import, division
+
 all_courses = {}
 
 import collections

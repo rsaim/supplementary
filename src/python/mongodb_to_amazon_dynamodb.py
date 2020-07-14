@@ -1,5 +1,7 @@
-from pymongo import MongoClient
+from __future__ import absolute_import, division
+
 import boto3
+from   pymongo                  import MongoClient
 
 client = MongoClient(host="localhost", port=27017)
 db = client.dtu

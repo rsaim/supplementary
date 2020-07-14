@@ -21,23 +21,25 @@ with open('/Users/saim/github/supplementary/test_pdfs/success_urls.pkl', 'rb') a
 2020-06-27 03:31:53.233 | INFO     | __main__:scrap_pdfs_from_url:133 - DONE!!
 
 """
+from __future__ import absolute_import, division
+
+from   os.path                  import realpath
 import pickle
 import shutil
-from os.path import realpath
 
-from tqdm import tqdm
-from urllib.parse import urljoin
-from os import path
-from bs4 import BeautifulSoup as soup
-import os
+from   bs4                      import BeautifulSoup as soup
 import click
-import requests
 import concurrent
-import urllib
-import sys
+import os
+from   os                       import path
 import pprint
+import requests
+import sys
+from   tqdm                     import tqdm
+import urllib
+from   urllib.parse             import urljoin
 
-from loguru import logger as log
+from   loguru                   import logger as log
 
 
 MAX_DOWNLOAD_THREADS = 15
