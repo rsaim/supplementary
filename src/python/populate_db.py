@@ -5,6 +5,9 @@ This script populates a local MongoDB instance.
 """
 from __future__ import absolute_import, division
 
+from concurrent.futures import as_completed
+from concurrent.futures.process import ProcessPoolExecutor
+
 import click
 import concurrent
 import json
@@ -15,7 +18,7 @@ import psutil
 from   pymongo                  import MongoClient
 import time
 
-from   parse_results            import parse_pdf_to_dfs
+from   parse_results            import parse_dtu_result_pdf
 from   utils                    import get_filepaths
 
 
@@ -29,7 +32,7 @@ def parse_and_populate_db(pdf):
     if not pdf.endswith(".pdf"):
         return
     try:
-        df_list = parse_pdf_to_dfs(pdf)
+        df_list = parse_dtu_result_pdf(pdf)
         log.info(f"{pdf}: Parsing OK")
     except Exception as err:
         log.error(f"{pdf}: Failed to parse: {err!r}")
@@ -90,13 +93,14 @@ def populate_db(dirname=None, filepath=None):
         raise ValueError("Specify either filename or dirname")
     if filepath:
         if not filepath.endswith(".pdf"):
+            log.warning("{!r} isn't a pdf file.")
             return
         parse_and_populate_db(filepath)
     else:
-        with concurrent.futures.ProcessPoolExecutor(max_workers=MAX_NUM_PROCESSES) as executor:
+        with ProcessPoolExecutor(max_workers=MAX_NUM_PROCESSES) as executor:
             future_to_pdf = {executor.submit(parse_and_populate_db, filepath): filepath
                              for filepath in get_filepaths(realpath(dirname))}
-            for future in concurrent.futures.as_completed(future_to_pdf):
+            for future in as_completed(future_to_pdf):
                 filename = future_to_pdf[future]
                 try:
                     future.result()

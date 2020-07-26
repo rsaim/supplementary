@@ -2,7 +2,7 @@
 Parse results of DTU into the following json structure.
 
 {
-    "roll_no" : {
+    "rollno" : {
         "branch": "<branchname>",
         "name"  : "<student full name>",
         "results" : {
@@ -23,25 +23,34 @@ Parse results of DTU into the following json structure.
 """
 from __future__ import absolute_import, division
 
+import json
+import os
 import re
-from   os.path                  import realpath
+from concurrent.futures import as_completed
+from concurrent.futures.process import ProcessPoolExecutor
+from os.path import realpath, dirname, basename
 import sys
 
 import pandas as pd
 import pdfplumber
+import psutil
 import tabula
 from   timeit                   import default_timer as timer
 
 from   loguru                   import logger as log
+# fmt = "[{time}|{function:}|{line}|{level}] {message}"
+
+sys.path.append(realpath(dirname(__file__)))
+from utils import get_filepaths, RedirectStdStreams
+
 log.remove()
 log.add(sys.stdout, level="INFO")
 
 
 SANITIZED_NAME_MAP = {
-    'Sr.No.  Name'   : 'name',
-    'Sr.No. Name'   : 'name',
-    'Roll No.'      : 'roll_no',
-    'Unnamed: 1'    : 'papers_failed'
+    'sr.no.name'   : 'name',
+    'rollno.'      : 'rollno',
+    'unnamed:1'    : 'papers_failed'
 }
 
 
@@ -58,7 +67,7 @@ def sanitize_df(df):
     """
     sanitized_names = []
     for x in df.columns:
-        new_name = SANITIZED_NAME_MAP.get(x, None)
+        new_name = SANITIZED_NAME_MAP.get(x.lower().replace(" ", ""), None)
         if new_name:
             log.debug(f"Sanitizing {x!r} to {new_name!r}")
             sanitized_names.append(new_name)
@@ -74,7 +83,7 @@ def sanitize_df(df):
 
     """
     Papers failed in multiple lines must be added to the row above.
-                         name     roll_no MC-301 MC-302 MC-303 MC-304 MC-305 MC-306 MC-307 MC-308 MC-309    TC    SPI    papers_failed
+                         name     rollno MC-301 MC-302 MC-303 MC-304 MC-305 MC-306 MC-307 MC-308 MC-309    TC    SPI    papers_failed
     0       25 KISHAN  ASHIYA  2K12/MC/29     75     63     30     69     68     76     84     72    162  26.0  62.93           MC-303
     ...
     22        45 RAHUL  MEENA  2K12/MC/49     12     23     25     40     28     62     71     64    100  14.0  25.13  MC-305MC-303MC-
@@ -107,13 +116,14 @@ def sanitize_df(df):
     df.reset_index(drop=True, inplace=True)
 
     # Remove number and space from the begining of names. Also replace double spaces with a single space.
-    df['name'] = df['name'].apply(lambda x: x.strip("0123456789 ").replace("  ", " "))
+    df['name'] = df['name'].apply(lambda x: x.strip("0123456789 ").replace("  ", " ")
+    if isinstance(x, str) else x)
 
     """
     A long name that spans multiple lines has all columns except name as NaN. Append this name to
     the name in the previous row. For instance 'KOMARAVOLU NITIN BHARDWAJ' is a single name below.
     
-                     name     roll_no MC-301 MC-302 MC-303 MC-304 MC-305 MC-306 MC-307 MC-308 MC-309    TC    SPI     paper_failed
+                     name     rollno MC-301 MC-302 MC-303 MC-304 MC-305 MC-306 MC-307 MC-308 MC-309    TC    SPI     paper_failed
     0       KISHAN ASHIYA  2K12/MC/29     75     63     30     69     68     76     84     72    162  26.0  62.93           MC-303
     1    KOMARAVOLU NITIN  2K12/MC/30     86     69     82     84     89     75     88     87    185  30.0  83.67              NaN
     2            BHARDWAJ         NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN    NaN   NaN    NaN              NaN
@@ -183,11 +193,11 @@ def parse_metadata(filepath, page_num):
     :param text:
     :return:
     """
+    log.debug(f"Parsing metadata filepaht={filepath!r} page={page_num}...")
     pdf = pdfplumber.open(filepath)
     pages = list(pdf.pages)
-    if page_num not in range(1, len(pages)):
+    if page_num not in range(0, len(pages)):
         raise ValueError(f"{filepath!r} has {len(pages)}, passed page_num={page_num}")
-    page_num += 1  # keep indexing from 1 in pdfs for humans
     page = pages[page_num]
     text = page.extract_text()
 
@@ -221,69 +231,141 @@ def parse_metadata(filepath, page_num):
 
     for k, v in res.items():
         if not v:
-            raise ValueError(f"Couldn't determine {k!r} from {filepath!r} page number {page_num}:\n{text}")
+            raise ValueError(f"Couldn't determine {k!r} from {filepath!r} "
+                             f"page number {page_num}:\n{text}")
 
     return res
 
-def parse_pdf_to_dfs(filename):
+def parse_dtu_result_pdf(filepath):
     """
-    Parse a dtu result pdf
+    Parse a dtu result pdf.
 
-    :param filename:
+    :param filepath:
         A path to the pdf file
     :return:
-        A list of `pandas.DataFrame`
+        A list of `dict` where each entry is in the following form.
 
-        results = {
-            "<roll_no>" : {
-                "program"    : "<btech, mtech, etc>",
-                "branch"     : "<branchname>",
-                "name"       : "<student full name>",
-                "results"    : {
-                    "<number of sem>" : {
-                        "pdf_info"            : {
-                                "filename"        : "<name>",
-                                "page_no"         : "<val>"
-                        }
-                        "release_date"        : "<date>",
-                        "examination_date"    : "<date>",
-                        "notice"          : "<notice_num>",
-                        "spi"                 : "<val>",
-                        "papers_failed"       : ["sub1_code", "sub2_code", ...],
-                        "marks"               : {
-                             "<subject1_code>"    : "<marks>",
-                             "<subject2_code>"    : "<marks>",
-                        }
-                    }
+        results = [
+            {
+                "name"                : "<student full name>",
+                "rollno"              : "<rollno>"
+                "program"             : "<btech, mtech, etc>",
+                "branch"              : "<branchname>",
+                "semester"            : "<semester number>",
+                "pdf_filename"        : "<filename>",
+                "pdf_pagenum"         : "<pagenum>",
+                "release_date"        : "<date>",
+                "examination_date"    : "<date>",
+                "notice"              : "<notice>",
+                "SPI"                 : "<spi>",
+                "total_credits"       : "<total_credits>",
+                "papers_failed"       : ["sub1_code", "sub2_code", ...],
+                "marks"               : {
+                    "<subject1_code>"    : "<marks>",
+                    "<subject2_code>"    : "<marks>",
+                    ...
                 }
             },
             # ...
-        }
+        ]
     """
-    filename = realpath(filename)
-    log.info(f"Parsing {filename}")
+    filepath = realpath(filepath)
+    log.info(f"Parsing {filepath}")
 
     # Use tabula to parse the tables in the pdf
     start_ts = timer()
     # This will be a list of `pandas.DataFrame`
-    pages_df = tabula.read_pdf(filename, pages='all')
-    log.info(f"Took {timer() - start_ts} to parse {filename}")
+    with RedirectStdStreams():
+        pages_df = tabula.read_pdf(filepath, pages='all')
+    log.info(f"Took {timer() - start_ts} to parse {filepath}")
 
-    # Use pdfplumber to parse metadata like sem
-    pdfplumber_pages = pdfplumber.open(filename)
-
-    log.info(f"Found {len(pages_df)} pages in {filename}")
+    log.info(f"Found {len(pages_df)} pages in {filepath}")
     sanitized_dfs = []
-    for num, page_df in enumerate(pages_df):
+    for num, df in enumerate(pages_df):
         log.debug(f"Sanitizing page no {num}...")
-        sanitized_dfs.append(sanitize_df(page_df))
-        log.debug(f"Getting metadata using pdfplumber for page no {num}...")
-        metadata = parse_metadata(pdfplumber_pages[num])
-    log.info(f"Parsed tables in {filename}")
+        # import ipdb; ipdb.set_trace()
+        sanitized_dfs.append(sanitize_df(df))
+    log.info(f"Parsed tables in {filepath}")
 
-    return sanitized_dfs
+    parsed_data = []
+    for num, df in enumerate(sanitized_dfs):
+        log.debug(f"Extracting metadata from page no {num}...")
+        metadata = parse_metadata(filepath, num)
+        for row in json.loads(df.to_json(orient="records")):
+            parsed_data.append(
+            dict(
+                name                = row.pop("name"),
+                rollno              = row.pop("rollno"),
+                program             = metadata["program"],
+                branch              = metadata["branch"],
+                semester            = metadata["semester"],
+                pdf_filename        = basename(filepath),
+                pdf_pagenum         = num,
+                release_date        = metadata["release_date"],
+                examination_date    = metadata["examination_date"],
+                notice              = metadata["notice"],
+                SPI                 = row.pop("SPI"),
+                total_credits       = row.pop("TC"),
+                papers_failed       = row.pop("papers_failed"),
+                marks               = row,
+            )
+        )
+    return parsed_data
 
 
+def parse_all_pdf(dirpath,
+                  parallel=False,
+                  num_processes=psutil.cpu_count(logical=True),
+                  progress_file=None):
+    """Parse all pdf results available in `dirpath`"""
+    res = []
+    progress_history = {}
+    if progress_file and os.path.exists(progress_file):
+        progress_file = realpath(progress_file)
+        log.info("Reading previous parsing progress from {!r}".format(progress_file))
+        with open(progress_file, "r") as f:
+            progress_history = json.load(f)
+
+    curr_progress = {}
+    for filepath in get_filepaths(realpath(dirpath)):
+        if progress_history.get(basename(filepath), False):
+            curr_progress[basename(filepath)] = True
+        else:
+            curr_progress[basename(filepath)] = False
+
+    if parallel:
+        with ProcessPoolExecutor(max_workers=num_processes) as executor:
+            future_to_pdf = {}
+            for filepath, skip in curr_progress.items():
+                if not skip:
+                    future_to_pdf[executor.submit(parse_dtu_result_pdf,
+                                                  os.path.join(dirpath, filepath))] = filepath
+            for future in as_completed(future_to_pdf):
+                filepath = future_to_pdf[future]
+                try:
+                    res_filename = future.result()
+                    log.info(f"Successfully parsed {filepath!r}")
+                    curr_progress[basename(filepath)] = True
+                    res.append(res_filename)
+                except Exception as exc:
+                    log.error(f"Failed to parse {filepath!r})")
+                    curr_progress[basename(filepath)] = False
+    else:
+        # Enables interactive debugging
+        for filepath in get_filepaths(realpath(dirpath)):
+            if progress_history.get(basename(filepath), False):
+                curr_progress[basename(filepath)] = True
+            else:
+                try:
+                    res.extend(parse_dtu_result_pdf(filepath))
+                    curr_progress[basename(filepath)] = True
+                except Exception as exc:
+                    log.error(f"Failed to parse {filepath}: {exc}")
+                    curr_progress[basename(filepath)] = False
+                    import ipdb; ipdb.set_trace()
+    with open(progress_file, "w+") as f:
+        json.dump(curr_progress, f, indent=4, sort_keys=True)
+    return res
 
 
 
