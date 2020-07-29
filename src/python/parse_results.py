@@ -23,12 +23,13 @@ Parse results of DTU into the following json structure.
 """
 from __future__ import absolute_import, division
 
+from   concurrent.futures       import as_completed
+from   concurrent.futures.process \
+                                import ProcessPoolExecutor
 import json
 import os
+from   os.path                  import basename, dirname, realpath
 import re
-from concurrent.futures import as_completed
-from concurrent.futures.process import ProcessPoolExecutor
-from os.path import realpath, dirname, basename
 import sys
 
 import pandas as pd
@@ -41,7 +42,7 @@ from   loguru                   import logger as log
 # fmt = "[{time}|{function:}|{line}|{level}] {message}"
 
 sys.path.append(realpath(dirname(__file__)))
-from utils import get_filepaths, RedirectStdStreams
+from   utils                    import HideUnderlyingStderrCtx, get_filepaths
 
 log.remove()
 log.add(sys.stdout, level="INFO")
@@ -211,9 +212,10 @@ def parse_metadata(filepath, page_num):
     )
 
     for line in text.split("\n"):
-        if line.startswith("No."):
-            # Grab the notice number:
+        if re.sub('[^0-9a-zA-Z]+', '', line).lower().startswith(("no", "resultnotification")):
+            # Grab the notice number from lines like:
             #   No.DTU/Results/BTECH/DEC/2014/
+            #   Result Notification No.DTU/Results/BTECH/DEC/2016/
             res["notice"] = line
         elif line.startswith("THE RESULT OF THE CANDIDATES WHO APPEARED IN THE FOLLOWING EXAMINATIONS HELD IN"):
             res["examination_date"] = re.match(r".*((JAN|FEB|MAR|APR|MAY|JUN|AUG|SEPT|OCT|NOV|DEC)[-|\.]2\d{3,}).*", line).groups()[0]
@@ -274,8 +276,8 @@ def parse_dtu_result_pdf(filepath):
 
     # Use tabula to parse the tables in the pdf
     start_ts = timer()
-    # This will be a list of `pandas.DataFrame`
-    with RedirectStdStreams():
+    with HideUnderlyingStderrCtx():
+        # This will be a list of `pandas.DataFrame`
         pages_df = tabula.read_pdf(filepath, pages='all')
     log.info(f"Took {timer() - start_ts} to parse {filepath}")
 

@@ -23,16 +23,14 @@ with open('/Users/saim/github/supplementary/test_pdfs/success_urls.pkl', 'rb') a
 """
 from __future__ import absolute_import, division
 
+from   concurrent.futures       import as_completed
+from   concurrent.futures.thread \
+                                import ThreadPoolExecutor
 import json
-from concurrent.futures import as_completed
-from concurrent.futures.thread import ThreadPoolExecutor
 from   os.path                  import realpath
-import pickle
-import shutil
 
 from   bs4                      import BeautifulSoup as soup
 import click
-import concurrent
 import os
 from   os                       import path
 import pprint

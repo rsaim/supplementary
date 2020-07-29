@@ -6,8 +6,8 @@ import re
 import os
 
 # https://stackoverflow.com/a/19308592/6463555
-import sys
 from   os.path                  import realpath
+import sys
 
 
 def get_filepaths(directory):
@@ -60,6 +60,8 @@ def sanitize_filenames(dir):
 
 
 class RedirectStdStreams(object):
+    """This works only on Python calls. Stdout/err from underlying
+    C calls would be missed."""
     def __init__(self, stdout=None, stderr=None):
         self._stdout = stdout or sys.stdout
         self._stderr = stderr or sys.stderr
@@ -73,3 +75,32 @@ class RedirectStdStreams(object):
         self._stdout.flush(); self._stderr.flush()
         sys.stdout = self.old_stdout
         sys.stderr = self.old_stderr
+
+
+# Based on https://stackoverflow.com/a/14797594/6463555
+class HideUnderlyingStderrCtx(object):
+    '''
+    A context manager that block stdout for its scope, usage:
+
+    Hides stderr from underlying libraries (not Python).
+
+    with HideUnderlyingStderrCtx():
+        os.system('ls -l')
+    '''
+
+    def __init__(self, *args, **kw):
+        sys.stdout.flush()
+        self._origstdout = sys.stdout
+        self._oldstdout_fno = os.dup(sys.stdout.fileno())
+        self._devnull = os.open(os.devnull, os.O_WRONLY)
+
+    def __enter__(self):
+        self._newstdout = os.dup(2)
+        os.dup2(self._devnull, 2)
+        os.close(self._devnull)
+        sys.stdout = os.fdopen(self._newstdout, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout = self._origstdout
+        sys.stdout.flush()
+        os.dup2(self._oldstdout_fno, 2)

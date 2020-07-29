@@ -5,11 +5,11 @@ This script populates a local MongoDB instance.
 """
 from __future__ import absolute_import, division
 
-from concurrent.futures import as_completed
-from concurrent.futures.process import ProcessPoolExecutor
+from   concurrent.futures       import as_completed
+from   concurrent.futures.process \
+                                import ProcessPoolExecutor
 
 import click
-import concurrent
 import json
 from   loguru                   import logger as log
 import os
