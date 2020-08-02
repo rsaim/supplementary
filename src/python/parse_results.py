@@ -228,8 +228,8 @@ def parse_metadata(filepath, page_num):
 
     for k, v in res.items():
         if not v:
-            raise ValueError(f"Couldn't determine {k!r} from {filepath!r} "
-                             f"page number {page_num}:\n{text}")
+            raise ValueError(f"Couldn't determine {k!r} from {basename(filepath)!r} "
+                             f"page number {page_num}")
 
     return res
 
@@ -276,7 +276,7 @@ def parse_dtu_result_pdf(filepath):
     log.debug(f"Took {timer() - start_ts} to parse {filepath}")
 
     if len(pages_df) == 0:
-        raise ValueError(f"tabula found 0 pages in {filepath!r}")
+        raise ValueError(f"tabula found 0 pages in {basename(filepath)!r}")
 
     log.info(f"Found {len(pages_df)} pages in {filepath}")
     sanitized_dfs = []
@@ -348,7 +348,7 @@ def parse_all_pdf(dirpath=get_topdir() / "data/dtu_results",
                 except KeyboardInterrupt:
                     raise
                 except Exception as exc:
-                    log.error(f"Failed to parse {filepath}: {exc}")
+                    log.error(f"Failed to parse {basename(filepath)}: {exc}")
                     curr_progress[basename(filepath)] = repr(exc)
     else:
         # Enables interactive debugging on errors
@@ -362,7 +362,7 @@ def parse_all_pdf(dirpath=get_topdir() / "data/dtu_results",
                 except KeyboardInterrupt:
                     raise
                 except Exception as exc:
-                    log.error(f"Failed to parse {filepath}: {exc}")
+                    log.error(f"Failed to parse {basename(filepath)}: {exc}")
                     curr_progress[basename(filepath)] = repr(exc)
                     import ipdb; ipdb.set_trace()
 
