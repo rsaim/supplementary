@@ -1,0 +1,6 @@
+# Ignore everything in this directory
+# The /data dir is used to sync contents from the dropbox store
+*
+# Except these file
+!.gitignore
+!README.md
