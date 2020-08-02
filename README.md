@@ -46,9 +46,12 @@ Project setup:
 
     2.  From the root dir of your clone, run the following command.
 
-        ```python src/python/dropbox_updown.py data data```
+        ```python src/python/dropbox_updown.py data data --yes```
 
     This will clone all the data from the dropbox storage. The above command needs to be run everytime after you make changes to the `/data`folder. Please note that we don't track the contents of the folder using git.
+
+    NOTE: use `--yes` option with caution as it will no longer prompt to sync any modified or deleted files/dirs. When used first time, it is safe and will create the
+necessary dirs/files for you.
 
 #### Dropbox Usage
 
