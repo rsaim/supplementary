@@ -284,8 +284,7 @@ def parse_dtu_result_pdf(filepath):
     log.info(f"Found {len(pages_df)} pages in {filepath}")
     sanitized_dfs = []
     for num, df in enumerate(pages_df):
-        log.debug(f"Sanitizing page no {num}...")
-        # import ipdb; ipdb.set_trace()
+        log.info(f"Sanitizing page no {num}...")
         sanitized_dfs.append(sanitize_df(df))
     log.info(f"Parsed tables in {filepath}")
 
@@ -329,17 +328,15 @@ def parse_all_pdf(dirpath,
             progress_history = json.load(f)
 
     curr_progress = {}
-    for filepath in get_filepaths(realpath(dirpath)):
-        if progress_history.get(basename(filepath), False):
-            curr_progress[basename(filepath)] = True
-        else:
-            curr_progress[basename(filepath)] = False
 
     if parallel:
         with ProcessPoolExecutor(max_workers=num_processes) as executor:
             future_to_pdf = {}
-            for filepath, skip in curr_progress.items():
-                if not skip:
+            for filepath in get_filepaths(realpath(dirpath)):
+                if progress_history.get(basename(filepath), False) is True:
+                    curr_progress[basename(filepath)] = True
+                    continue
+                else:
                     future_to_pdf[executor.submit(parse_dtu_result_pdf,
                                                   os.path.join(dirpath, filepath))] = filepath
             for future in as_completed(future_to_pdf):
@@ -350,12 +347,12 @@ def parse_all_pdf(dirpath,
                     curr_progress[basename(filepath)] = True
                     res.append(res_filename)
                 except Exception as exc:
-                    log.error(f"Failed to parse {filepath!r})")
-                    curr_progress[basename(filepath)] = False
+                    log.error(f"Failed to parse {filepath}: {exc}")
+                    curr_progress[basename(filepath)] = repr(exc)
     else:
-        # Enables interactive debugging
+        # Enables interactive debugging on errors
         for filepath in get_filepaths(realpath(dirpath)):
-            if progress_history.get(basename(filepath), False):
+            if progress_history.get(basename(filepath), False) is True:
                 curr_progress[basename(filepath)] = True
             else:
                 try:
@@ -363,7 +360,7 @@ def parse_all_pdf(dirpath,
                     curr_progress[basename(filepath)] = True
                 except Exception as exc:
                     log.error(f"Failed to parse {filepath}: {exc}")
-                    curr_progress[basename(filepath)] = False
+                    curr_progress[basename(filepath)] = repr(exc)
                     import ipdb; ipdb.set_trace()
     with open(progress_file, "w+") as f:
         json.dump(curr_progress, f, indent=4, sort_keys=True)
