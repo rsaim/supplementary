@@ -275,6 +275,9 @@ def parse_dtu_result_pdf(filepath):
     pages_df = tabula_read_pdf(filepath, pages='all')
     log.debug(f"Took {timer() - start_ts} to parse {filepath}")
 
+    if len(pages_df) == 0:
+        raise ValueError(f"tabula found 0 pages in {filepath!r}")
+
     log.info(f"Found {len(pages_df)} pages in {filepath}")
     sanitized_dfs = []
     for num, df in enumerate(pages_df):
@@ -311,11 +314,13 @@ def parse_dtu_result_pdf(filepath):
 def parse_all_pdf(dirpath=get_topdir() / "data/dtu_results",
                   parallel=False,
                   num_processes=psutil.cpu_count(logical=True),
-                  progress_file=get_topdir() / "etc/parse_progress.json",):
+                  progress_file=get_topdir() / "etc/parse_progress.json",
+                  refresh_progress_file=False,
+                  dump_parsed_data_file=get_topdir() / "data/parsed_data.json"):
     """Parse all pdf results available in `dirpath`"""
     res = []
     progress_history = {}
-    if progress_file and os.path.exists(progress_file):
+    if not refresh_progress_file and progress_file and os.path.exists(progress_file):
         progress_file = realpath(progress_file)
         log.info("Reading previous parsing progress from {!r}".format(progress_file))
         with open(progress_file, "r") as f:
@@ -339,7 +344,7 @@ def parse_all_pdf(dirpath=get_topdir() / "data/dtu_results",
                     res_filename = future.result()
                     log.info(f"Successfully parsed {filepath!r}")
                     curr_progress[basename(filepath)] = True
-                    res.append(res_filename)
+                    res.extend(res_filename)
                 except KeyboardInterrupt:
                     raise
                 except Exception as exc:
@@ -360,8 +365,14 @@ def parse_all_pdf(dirpath=get_topdir() / "data/dtu_results",
                     log.error(f"Failed to parse {filepath}: {exc}")
                     curr_progress[basename(filepath)] = repr(exc)
                     import ipdb; ipdb.set_trace()
+
     with open(progress_file, "w+") as f:
         json.dump(curr_progress, f, indent=4, sort_keys=True)
+
+    if dump_parsed_data_file:
+        with open(dump_parsed_data_file, "w") as f:
+            json.dump(res, f, indent=4, sort_keys=True)
+
     return res
 
 
