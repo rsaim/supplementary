@@ -4,7 +4,7 @@
 This is an example app for API v2.
 """
 
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
 
 import argparse
 import contextlib

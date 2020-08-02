@@ -6,8 +6,13 @@ import re
 import os
 
 # https://stackoverflow.com/a/19308592/6463555
-from   os.path                  import realpath
+from os.path import realpath, basename
 import sys
+import diskcache
+from pathlib import Path
+
+import pdfplumber
+import tabula
 
 
 def get_filepaths(directory):
@@ -104,3 +109,51 @@ class HideUnderlyingStderrCtx(object):
         sys.stdout = self._origstdout
         sys.stdout.flush()
         os.dup2(self._oldstdout_fno, 2)
+
+
+def get_topdir():
+    """
+    Searches for a file .top in the parent dirs iteratively.
+
+    Returns a `pathlib.PosixPath` object.
+    """
+    path = Path(os.path.dirname(__file__))
+    while True:
+        if (path / ".top").exists():
+            return path
+        if path.parent == path:
+            # Seems like we reached the home /
+            raise ValueError("Couldn't determine root directory.")
+        path = path.parent
+
+
+tabula_cache = diskcache.Cache(get_topdir() / "data/caches/tabula")
+
+def tabula_read_pdf(filepath, pages):
+    """Wrapper over `tabule.read_pdf which memoizes results using
+    `os.path.basename(filepath)` and param `pages`."""
+    try:
+        return tabula_cache[(basename(filepath), pages)]
+    except KeyError:
+        pass
+    with HideUnderlyingStderrCtx():
+        pages_df = tabula.read_pdf(filepath, pages=pages)
+    tabula_cache[(basename(filepath), pages)] = pages_df
+    return pages_df
+
+
+pdfplumber_cache = diskcache.Cache(get_topdir() / "data/caches/pdfplumber")
+
+def pdfplumber_extract_text(filepath, page_num):
+    try:
+        return pdfplumber_cache[(basename(filepath), page_num)]
+    except KeyError:
+        pass
+    pdf = pdfplumber.open(filepath)
+    pages = list(pdf.pages)
+    if page_num not in range(0, len(pages)):
+        raise ValueError(f"{filepath!r} has {len(pages)}, passed page_num={page_num}")
+    page = pages[page_num]
+    text = page.extract_text()
+    pdfplumber_cache[(basename(filepath), page_num)] = text
+    return text

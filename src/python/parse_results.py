@@ -33,16 +33,16 @@ import re
 import sys
 
 import pandas as pd
-import pdfplumber
 import psutil
-import tabula
 from   timeit                   import default_timer as timer
 
 from   loguru                   import logger as log
 # fmt = "[{time}|{function:}|{line}|{level}] {message}"
 
 sys.path.append(realpath(dirname(__file__)))
-from   utils                    import HideUnderlyingStderrCtx, get_filepaths
+from   utils                    import (get_filepaths, get_topdir,
+                                        pdfplumber_extract_text,
+                                        tabula_read_pdf)
 
 log.remove()
 log.add(sys.stdout, level="INFO")
@@ -195,12 +195,7 @@ def parse_metadata(filepath, page_num):
     :return:
     """
     log.debug(f"Parsing metadata filepaht={filepath!r} page={page_num}...")
-    pdf = pdfplumber.open(filepath)
-    pages = list(pdf.pages)
-    if page_num not in range(0, len(pages)):
-        raise ValueError(f"{filepath!r} has {len(pages)}, passed page_num={page_num}")
-    page = pages[page_num]
-    text = page.extract_text()
+    text = pdfplumber_extract_text(filepath, page_num)
 
     res = dict(
         program             = None,
@@ -276,9 +271,8 @@ def parse_dtu_result_pdf(filepath):
 
     # Use tabula to parse the tables in the pdf
     start_ts = timer()
-    with HideUnderlyingStderrCtx():
-        # This will be a list of `pandas.DataFrame`
-        pages_df = tabula.read_pdf(filepath, pages='all')
+    # This will be a list of `pandas.DataFrame`
+    pages_df = tabula_read_pdf(filepath, pages='all')
     log.info(f"Took {timer() - start_ts} to parse {filepath}")
 
     log.info(f"Found {len(pages_df)} pages in {filepath}")
@@ -314,10 +308,10 @@ def parse_dtu_result_pdf(filepath):
     return parsed_data
 
 
-def parse_all_pdf(dirpath,
+def parse_all_pdf(dirpath=get_topdir() / "data/dtu_results",
                   parallel=False,
                   num_processes=psutil.cpu_count(logical=True),
-                  progress_file=None):
+                  progress_file=get_topdir() / "etc/parse_progress.json",):
     """Parse all pdf results available in `dirpath`"""
     res = []
     progress_history = {}
@@ -346,6 +340,8 @@ def parse_all_pdf(dirpath,
                     log.info(f"Successfully parsed {filepath!r}")
                     curr_progress[basename(filepath)] = True
                     res.append(res_filename)
+                except KeyboardInterrupt:
+                    raise
                 except Exception as exc:
                     log.error(f"Failed to parse {filepath}: {exc}")
                     curr_progress[basename(filepath)] = repr(exc)
@@ -358,6 +354,8 @@ def parse_all_pdf(dirpath,
                 try:
                     res.extend(parse_dtu_result_pdf(filepath))
                     curr_progress[basename(filepath)] = True
+                except KeyboardInterrupt:
+                    raise
                 except Exception as exc:
                     log.error(f"Failed to parse {filepath}: {exc}")
                     curr_progress[basename(filepath)] = repr(exc)
