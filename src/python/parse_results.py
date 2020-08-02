@@ -194,7 +194,7 @@ def parse_metadata(filepath, page_num):
     :param text:
     :return:
     """
-    log.debug(f"Parsing metadata filepaht={filepath!r} page={page_num}...")
+    log.debug(f"Parsing metadata filepath={filepath!r} page={page_num}...")
     text = pdfplumber_extract_text(filepath, page_num)
 
     res = dict(
@@ -273,12 +273,12 @@ def parse_dtu_result_pdf(filepath):
     start_ts = timer()
     # This will be a list of `pandas.DataFrame`
     pages_df = tabula_read_pdf(filepath, pages='all')
-    log.info(f"Took {timer() - start_ts} to parse {filepath}")
+    log.debug(f"Took {timer() - start_ts} to parse {filepath}")
 
     log.info(f"Found {len(pages_df)} pages in {filepath}")
     sanitized_dfs = []
     for num, df in enumerate(pages_df):
-        log.info(f"Sanitizing page no {num}...")
+        log.debug(f"Sanitizing page no {num}...")
         sanitized_dfs.append(sanitize_df(df))
     log.info(f"Parsed tables in {filepath}")
 
