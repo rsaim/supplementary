@@ -32,7 +32,45 @@ Project setup:
     $ pip install -r requirements.txt
     ```
 
+-   Sync /data from dropbox
 
+    This step downloads
+
+    -   Raw pdf results files
+    -   Caches to speedup parsing of pdfs during development
+    -   Update the parsed data
+
+    Steps:
+
+    1.  Export `SUPPLEMENTARY_DROPBOX_TOKEN=<token>`in your environment.
+
+    2.  From the root dir of your clone, run the following command.
+
+        ```python src/python/dropbox_updown.py data data```
+
+    This will clone all the data from the dropbox storage. The above command needs to be run everytime after you make changes to the `/data`folder. Please note that we don't track the contents of the folder using git.
+
+#### Dropbox Usage
+
+We store the raw and parsed data and other shareable things like caches to a dropbox space. You will need to ask for `SUPPLEMENTARY_DROPBOX_TOKEN`from the maintainers to get started.
+
+```python
+>>> import dropbox
+>>> dbx = dropbox.Dropbox('<token>');
+```
+
+List files/folders in a directory.
+
+```python
+>>> [entry.name for entry in dbx.files_list_folder('').entries]
+['pdf', 'data']
+
+>>> [entry.name for entry in dbx.files_list_folder('/data').entries]
+['dtu_results', 'parsed_data.json']
+
+>>> len([entry.name for entry in dbx.files_list_folder('/data/dtu_results').entries])
+1319
+```
 
 Tips:
 
