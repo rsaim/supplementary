@@ -206,16 +206,20 @@ def parse_metadata(filepath, page_num):
         semester            = None,
     )
 
+    if text is None:
+        return None
+
     for line in text.split("\n"):
         if re.sub('[^0-9a-zA-Z]+', '', line).lower().startswith(("no", "resultnotification")):
             # Grab the notice number from lines like:
             #   No.DTU/Results/BTECH/DEC/2014/
             #   Result Notification No.DTU/Results/BTECH/DEC/2016/
             res["notice"] = line
-        elif line.startswith("THE RESULT OF THE CANDIDATES WHO APPEARED IN THE FOLLOWING EXAMINATIONS HELD IN"):
+        elif re.match(r".*((JAN|FEB|MAR|APR|MAY|JUN|AUG|SEPT|OCT|NOV|DEC)[-|\.]2\d{3,}).*", line):
             res["examination_date"] = re.match(r".*((JAN|FEB|MAR|APR|MAY|JUN|AUG|SEPT|OCT|NOV|DEC)[-|\.]2\d{3,}).*", line).groups()[0]
         elif line.startswith("Program :"):
-            re_progr_sem_info = re.match(r"(Program) : (.*) (Sem) : (.*)", line)
+
+            re_progr_sem_info = re.match(r"(Program :)? (.*) (Sem :)? (.*)?", line)
             if re_progr_sem_info:
                 res["program"] = re_progr_sem_info.groups()[1]
                 res["semester"] = re_progr_sem_info.groups()[3]
