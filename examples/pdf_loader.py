@@ -1,10 +1,10 @@
 import dropbox
+import os
 
-dbx = dropbox.Dropbox(<AUTH_KEY>)
+AUTH_KEY = os.environ.get('SUPPLEMENTARY_DROPBOX_TOKEN')
+dbx = dropbox.Dropbox(AUTH_KEY)
 
 folder_path = '/pdf/'
-
-
 # expects list of paths to be called with to upload them
 # Dont upload files larger than 150MB using this.
 def upload_files(paths):
@@ -19,6 +19,8 @@ def download_files(path):
     print(path)
     temp = dbx.files_download_to_file(path, folder_path+path)
 
-# if __name__ == "__main__":
-    upload_files(['demo.txt']) 
-    download_files('demo.txt')
+def download_cache_as_zip():
+    dbx.files_download_zip_to_file('data.zip', '/data')
+
+if __name__ == "__main__":
+    download_cache_as_zip()
